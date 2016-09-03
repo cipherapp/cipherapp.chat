@@ -128,8 +128,8 @@
   })();
 
   if (urlParams["secret"] != null) { $('#encrypted').show(); }
-  if (urlParams["signed"] != null && urlParams["signMethod"] == "touchID") { $('#encrypted').show(); }
-  if (urlParams["signed"] != null && urlParams["signMethod"] == "passcode") { $('#encrypted').show(); }
+  if (urlParams["signed"] != null && urlParams["signMethod"] == "touchID") { $('#touch-id').show(); }
+  if (urlParams["signed"] != null && urlParams["signMethod"] == "passcode") { $('#passcode').show(); }
 
 </script>
 
