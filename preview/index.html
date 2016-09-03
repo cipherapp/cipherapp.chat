@@ -1,24 +1,139 @@
-T<!doctype html>
+<!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Cipher</title>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+  <title>Cipher - Message Preview</title>
+  <link rel="stylesheet" media="all" href="./assets/application.css" />
+  <script src="./assets/application.js"></script>
+  <meta name="csrf-param" content="authenticity_token" />
+<meta name="csrf-token" content="36fCeNNilAj7HjyqHv1QpvNOFe8oSjt9qXdlfSgAMMZ3Xeka44OuKScoii33f0SFq9dJzcO55JCo3eYnuQqpew==" />
+</head>
+<body>
 
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/github-light.css">
-    <meta name="viewport" content="width=device-width">
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-  </head>
-  <body>
-    <div class="wrapper">
-      
-      <p>👋 hello there. This is a preview of a message... |</p>
-     
-    </div>
-    <script src="javascripts/scale.fix.js"></script>
-    
-  </body>
+
+<div class="container" style="text-align: center; max-width: 350px; padding-top: 20px;">
+    <div style="margin-bottom: 20px"></div>
+
+    <h4 class="" style="margin-bottom: 30px;">Cipher<sup>beta</sup></h4>
+
+    <p id="encrypted" class="this-message">This message was encrypted with <a href="https://en.wikipedia.org/wiki/Advanced_Encryption_Standard">AES-256</a>. Download Cipher to see the message.</p>
+    <p id="touch-id" class="this-message">This message was signed with Touch ID. Download Cipher to see the message.</p>
+    <p id="passcode" class="this-message">This message was signed with Device Passcode. Download Cipher to see the message.</p>
+
+    <a href="https://itunes.apple.com/us/app/cipher-encrypt-digitally-sign/id1145885207?ls=1&mt=8" class="app-store-badge"><img class="bbadge" src="./assets/badge.svg"></a>
+
+    <p class="desc">Questions & suggestions: <a href="mailto:dev@cipherapp.chat">dev@cipherapp.chat</a>.</p>
+    <p class="desc">Built by <a href="https://twitter.com/khanov">Salavat Khanov</a>.</p>
+
+</div>
+
+<style type="text/css">
+  html, body {
+    height: 100%;
+  }
+  body {
+    background-color: #f2bd57; /* fallback */
+    background: -webkit-linear-gradient(#ffe4a3, #f2bd57); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#ffe4a3, #f2bd57); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#ffe4a3, #f2bd57); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#ffe4a3, #f2bd57); /* Standard syntax */
+  }
+  .appIcon {
+    -webkit-border-radius: 22.544%;
+       -moz-border-radius: 22.544%;
+        -ms-border-radius: 22.544%;
+            border-radius: 22.544%;
+
+    width: 256px;
+  }
+  #submit {
+    margin-bottom: 20px;
+  }
+  .container {
+    position: relative;
+    top: 50%;
+    transform: perspective(1px) translateY(-50%);
+  }
+  input.form-control {
+    border-radius: 34px;
+  }
+  h4 {
+    font-size: 50px;
+    font-weight: 200;
+  }
+  .btn-primary {
+    background-color: #8cc84c;
+    border-color: #6aa62a;
+  }
+  .btn-primary:hover {
+    background-color: #7ab63a;
+    border-color: #6aa62a;
+  }
+  sup {
+    top: -2.3em;
+    left: 0.5em;
+    font-size: 25%;
+    font-style: italic;
+  }
+  .this-message {
+    font-size: 16px;
+  }
+  .desc {
+    text-align: center;
+  }
+  .desc, .desc a, .desc a:hover, .this-message a, .this-messagea a:hover {
+    color: #89490A;
+  }
+  .desc a, .this-message a {
+    text-decoration: underline;
+  }
+  .desc a:hover, .this-message a:hover {
+    text-decoration: none;
+  }
+  .alert-success {
+    color: #333;
+    background-color: transparent;
+    border-color: transparent;
+    font-size: 18px;
+  }
+  .bbadge {
+    margin-top: 20px;
+    margin-bottom: 50px;
+    width: 290px;
+    height: 60px;
+  }
+  .app-store-badge {
+    display: block;
+  }
+</style>
+
+<script type="text/javascript">
+  $('#encrypted').hide();
+  $('#touch-id').hide();
+  $('#passcode').hide();
+
+  var urlParams;
+
+  (window.onpopstate = function () {
+    var match,
+        pl     = /\+/g,  // Regex for replacing addition symbol with a space
+        search = /([^&=]+)=?([^&]*)/g,
+        decode = function (s) { return decodeURIComponent(s.replace(pl, " ")); },
+        query  = window.location.search.substring(1);
+
+    urlParams = {};
+    while (match = search.exec(query))
+       urlParams[decode(match[1])] = decode(match[2]);
+  })();
+
+  if (urlParams["secret"] != null) { $('#encrypted').show(); }
+  if (urlParams["signed"] != null && urlParams["signMethod"] == "touchID") { $('#encrypted').show(); }
+  if (urlParams["signed"] != null && urlParams["signMethod"] == "passcode") { $('#encrypted').show(); }
+
+</script>
+
+
+</body>
 </html>
+
